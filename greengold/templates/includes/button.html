@@ -1,0 +1,3 @@
+{# Renders a CTA button from a StructValue with label/page/url/style. #}
+{% if btn.page %}{% with href=btn.page.url %}<a href="{{ href }}" class="btn-{{ btn.style|default:'primary' }}">{{ btn.label }}{% include "includes/icon.html" with name="arrow-right" class="h-4 w-4" %}</a>{% endwith %}
+{% else %}<a href="{{ btn.url|default:'#' }}" class="btn-{{ btn.style|default:'primary' }}">{{ btn.label }}{% include "includes/icon.html" with name="arrow-right" class="h-4 w-4" %}</a>{% endif %}

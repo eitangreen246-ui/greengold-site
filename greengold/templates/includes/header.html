@@ -1,0 +1,45 @@
+{% load static %}
+<header x-data="{ open: false }" class="sticky top-0 z-40 border-b border-black/5 bg-bg/90 backdrop-blur">
+  <div class="container-x flex items-center justify-between gap-4 py-3">
+    {# Logo #}
+    <a href="/" class="flex flex-col leading-none" aria-label="GreenGold Bioscience — home">
+      <span class="font-serif text-2xl font-bold tracking-tight">
+        <span class="text-forest">Green</span><span class="text-gold">Gold</span>
+      </span>
+      <span class="text-[10px] font-semibold uppercase tracking-[0.35em] text-neutralgray">Bioscience</span>
+    </a>
+
+    {# Desktop nav #}
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Primary">
+      <a href="/delivery-systems/" class="text-sm font-medium text-ink/80 hover:text-forest">Delivery Systems</a>
+      <a href="/formulation/" class="text-sm font-medium text-ink/80 hover:text-forest">Formulation</a>
+      <a href="/ingredients/" class="text-sm font-medium text-ink/80 hover:text-forest">Ingredients</a>
+      <a href="/partner/" class="text-sm font-medium text-ink/80 hover:text-forest">Partner</a>
+      <a href="/about/" class="text-sm font-medium text-ink/80 hover:text-forest">About</a>
+    </nav>
+
+    <div class="hidden items-center gap-3 lg:flex">
+      <a href="/contact/" class="btn-primary">Get in touch</a>
+    </div>
+
+    {# Mobile toggle #}
+    <button type="button" class="inline-flex h-11 w-11 items-center justify-center rounded-lg text-forest lg:hidden"
+            @click="open = !open" :aria-expanded="open" aria-controls="mobile-menu" aria-label="Toggle menu">
+      <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+      <svg x-show="open" x-cloak xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  {# Mobile menu #}
+  <div id="mobile-menu" x-show="open" x-cloak x-transition class="border-t border-black/5 bg-bg lg:hidden">
+    <nav class="container-x flex flex-col py-3" aria-label="Mobile">
+      <a href="/delivery-systems/" class="border-b border-black/5 py-3 font-medium text-ink/80">Delivery Systems</a>
+      <a href="/formulation/" class="border-b border-black/5 py-3 font-medium text-ink/80">Formulation</a>
+      <a href="/ingredients/" class="border-b border-black/5 py-3 font-medium text-ink/80">Ingredients</a>
+      <a href="/partner/" class="border-b border-black/5 py-3 font-medium text-ink/80">Partner With Us</a>
+      <a href="/about/" class="border-b border-black/5 py-3 font-medium text-ink/80">About</a>
+      <a href="/contact/" class="btn-primary mt-3">Get in touch</a>
+    </nav>
+  </div>
+</header>
+<style>[x-cloak]{display:none!important;}</style>

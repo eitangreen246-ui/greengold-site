@@ -1,0 +1,50 @@
+{% load wagtailsettings_tags %}
+{% get_settings use_default_site=True as wagtail_settings %}
+{% with brand=wagtail_settings.core.BrandSettings %}
+<footer class="mt-auto bg-forest-900 text-white/80">
+  <div class="container-x grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="sm:col-span-2 lg:col-span-1">
+      <div class="font-serif text-2xl font-bold leading-none">
+        <span class="text-white">Green</span><span class="text-gold">Gold</span>
+      </div>
+      <div class="mt-1 text-[10px] font-semibold uppercase tracking-[0.35em] text-white/50">Bioscience</div>
+      <p class="mt-4 max-w-xs text-sm italic text-white/70">Bridging Science to Tomorrow's Beauty</p>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-gold">What we do</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href="/delivery-systems/" class="hover:text-white">Delivery Systems</a></li>
+        <li><a href="/formulation/" class="hover:text-white">Cosmetic Formulation</a></li>
+        <li><a href="/ingredients/" class="hover:text-white">Ingredients Portfolio</a></li>
+        <li><a href="/partner/" class="hover:text-white">Partner With Us</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-gold">Company</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href="/about/" class="hover:text-white">About Us</a></li>
+        <li><a href="/contact/" class="hover:text-white">Contact</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-xs font-semibold uppercase tracking-wider text-gold">Get in touch</h2>
+      <ul class="mt-4 space-y-2 text-sm">
+        <li><a href="mailto:{{ brand.contact_email|default:'hello@greengoldbioscience.com' }}" class="hover:text-white">{{ brand.contact_email|default:"hello@greengoldbioscience.com" }}</a></li>
+        {% if brand.phone %}<li><a href="tel:{{ brand.phone }}" class="hover:text-white">{{ brand.phone }}</a></li>{% endif %}
+        <li class="text-white/70">{{ brand.address|default:"Kibbutz Dafna, Israel" }}</li>
+        {% if brand.linkedin_url %}<li><a href="{{ brand.linkedin_url }}" class="hover:text-white" rel="noopener" target="_blank">LinkedIn</a></li>{% endif %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-x flex flex-col items-center justify-between gap-2 py-5 text-xs text-white/50 sm:flex-row">
+      <p>&copy; {% now "Y" %} GreenGold Bioscience. All rights reserved.</p>
+      <p>Science-led cosmetic innovation.</p>
+    </div>
+  </div>
+</footer>
+{% endwith %}

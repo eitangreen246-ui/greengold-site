@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="border-b border-black/5 bg-white">
+  <div class="container-x py-16 lg:py-20">
+    <div class="max-w-3xl">
+      {% if page.hero_badge %}<p class="eyebrow">{{ page.hero_badge }}</p>{% endif %}
+      <h1 class="mt-3 text-4xl font-bold leading-tight sm:text-5xl">{{ page.hero_heading|default:page.title }}</h1>
+      {% if page.hero_intro %}<p class="mt-5 text-lg text-ink/70">{{ page.hero_intro }}</p>{% endif %}
+      {% if page.hero_cta_label %}
+      <div class="mt-7">
+        <a href="{% if page.hero_cta_page %}{{ page.hero_cta_page.url }}{% else %}/contact/{% endif %}" class="btn-primary">
+          {{ page.hero_cta_label }}{% include "includes/icon.html" with name="arrow-right" class="h-4 w-4" %}
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% for block in page.body %}{% include_block block %}{% endfor %}
+{% endblock content %}

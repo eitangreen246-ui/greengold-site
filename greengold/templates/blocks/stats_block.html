@@ -1,0 +1,15 @@
+<section class="section">
+  <div class="container-x">
+    <div class="rounded-3xl bg-forest px-6 py-12 text-white sm:px-10">
+      {% if value.heading %}<h2 class="text-center text-2xl text-white sm:text-3xl">{{ value.heading }}</h2>{% endif %}
+      <dl class="mt-8 grid grid-cols-1 gap-8 text-center sm:grid-cols-3">
+        {% for stat in value.stats %}
+        <div>
+          <dt class="font-serif text-4xl font-bold text-gold sm:text-5xl">{{ stat.value }}</dt>
+          <dd class="mt-2 text-sm text-white/80">{{ stat.label }}</dd>
+        </div>
+        {% endfor %}
+      </dl>
+    </div>
+  </div>
+</section>

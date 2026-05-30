@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load wagtailsettings_tags %}
+{% get_settings use_default_site=True as wagtail_settings %}
+
+{% block content %}
+<section class="border-b border-black/5 bg-white">
+  <div class="container-x py-16 lg:py-20">
+    <div class="max-w-3xl">
+      <h1 class="text-4xl font-bold leading-tight sm:text-5xl">{{ page.hero_heading }}</h1>
+      {% if page.hero_intro %}<p class="mt-5 text-lg text-ink/70">{{ page.hero_intro }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container-x grid items-start gap-6 lg:grid-cols-2">
+
+    {# Audience A — cosmetics manufacturers #}
+    <div id="manufacturer" class="card p-8">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-forest-50 text-forest">
+          {% include "includes/icon.html" with name="flask" class="h-5 w-5" %}
+        </span>
+        <h2 class="text-2xl">{{ page.manufacturer_form_title }}</h2>
+      </div>
+      <p class="mt-2 text-ink/70">{{ page.manufacturer_form_intro }}</p>
+
+      {% if sent == "manufacturer" %}
+        <div class="mt-6 rounded-lg bg-forest-50 p-5 text-forest" role="status">
+          {% include "includes/icon.html" with name="check" class="mb-2 h-6 w-6" %}
+          <p class="font-medium">{{ page.thank_you_text }}</p>
+        </div>
+      {% else %}
+        <form method="post" action="{{ page.url }}#manufacturer" x-data="{ loading: false }" @submit="loading = true" class="mt-6" novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="manufacturer">
+          {% if manufacturer_form.non_field_errors %}<div class="mb-4 rounded bg-red-50 p-3 text-sm text-red-700" role="alert">{{ manufacturer_form.non_field_errors }}</div>{% endif %}
+          {% include "includes/field.html" with field=manufacturer_form.name %}
+          {% include "includes/field.html" with field=manufacturer_form.email %}
+          {% include "includes/field.html" with field=manufacturer_form.company %}
+          {% include "includes/field.html" with field=manufacturer_form.interest %}
+          {% include "includes/field.html" with field=manufacturer_form.message %}
+          <div class="hidden" aria-hidden="true">{{ manufacturer_form.website }}</div>
+          <button type="submit" class="btn-primary w-full" :disabled="loading">
+            <span x-show="!loading">Send enquiry</span>
+            <span x-show="loading" x-cloak>Sending…</span>
+          </button>
+        </form>
+      {% endif %}
+    </div>
+
+    {# Audience B — raw-material manufacturers #}
+    <div id="partner" class="card p-8">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gold-soft text-gold-text">
+          {% include "includes/icon.html" with name="handshake" class="h-5 w-5" %}
+        </span>
+        <h2 class="text-2xl">{{ page.partner_form_title }}</h2>
+      </div>
+      <p class="mt-2 text-ink/70">{{ page.partner_form_intro }}</p>
+
+      {% if sent == "partner" %}
+        <div class="mt-6 rounded-lg bg-forest-50 p-5 text-forest" role="status">
+          {% include "includes/icon.html" with name="check" class="mb-2 h-6 w-6" %}
+          <p class="font-medium">{{ page.thank_you_text }}</p>
+        </div>
+      {% else %}
+        <form method="post" action="{{ page.url }}#partner" x-data="{ loading: false }" @submit="loading = true" class="mt-6" novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="partner">
+          {% if partner_form.non_field_errors %}<div class="mb-4 rounded bg-red-50 p-3 text-sm text-red-700" role="alert">{{ partner_form.non_field_errors }}</div>{% endif %}
+          {% include "includes/field.html" with field=partner_form.name %}
+          {% include "includes/field.html" with field=partner_form.email %}
+          {% include "includes/field.html" with field=partner_form.company %}
+          {% include "includes/field.html" with field=partner_form.product_name %}
+          {% include "includes/field.html" with field=partner_form.target_market %}
+          {% include "includes/field.html" with field=partner_form.message %}
+          <div class="hidden" aria-hidden="true">{{ partner_form.website }}</div>
+          <button type="submit" class="btn-gold w-full" :disabled="loading">
+            <span x-show="!loading">Send enquiry</span>
+            <span x-show="loading" x-cloak>Sending…</span>
+          </button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="container-x mt-10 text-sm text-ink/60">
+    {% with brand=wagtail_settings.core.BrandSettings %}
+    <p>{{ brand.address }} · <a class="text-gold-text underline underline-offset-2 hover:text-forest" href="mailto:{{ brand.contact_email }}">{{ brand.contact_email }}</a>{% if brand.phone %} · <a class="text-gold-text underline underline-offset-2 hover:text-forest" href="tel:{{ brand.phone }}">{{ brand.phone }}</a>{% endif %}</p>
+    {% endwith %}
+  </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{% block title %}{% if page.seo_title %}{{ page.seo_title }}{% elif page.title %}{{ page.title }}{% endif %}{% endblock %}{% block title_suffix %}{% wagtail_site as current_site %}{% if current_site and current_site.site_name %} — {{ current_site.site_name }}{% endif %}{% endblock %}</title>
+
+    <meta name="description" content="{% block meta_description %}{% if page.search_description %}{{ page.search_description }}{% else %}GreenGold Bioscience bridges cutting-edge science to the global cosmetics industry — custom delivery systems, formulation, and novel raw materials.{% endif %}{% endblock %}" />
+
+    {# Canonical + Open Graph #}
+    {% block canonical %}{% if page.full_url %}<link rel="canonical" href="{{ page.full_url }}" />{% endif %}{% endblock %}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="GreenGold Bioscience" />
+    <meta property="og:title" content="{% block og_title %}{% if page.title %}{{ page.title }}{% else %}GreenGold Bioscience{% endif %}{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}{% if page.search_description %}{{ page.search_description }}{% else %}Bridging Science to Tomorrow's Beauty.{% endif %}{% endblock %}" />
+    {% if page.full_url %}<meta property="og:url" content="{{ page.full_url }}" />{% endif %}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {% if request.in_preview_panel %}<base target="_blank">{% endif %}
+
+    {# Fonts — Fraunces (serif display) + Inter (sans body) #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+
+    {# Organization structured data #}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "GreenGold Bioscience",
+      "description": "A scientific bridge between technological innovation and the global cosmetics, dermo-cosmetics and personal-care industries.",
+      "slogan": "Bridging Science to Tomorrow's Beauty",
+      "url": "{{ request.scheme }}://{{ request.get_host }}"
+    }
+    </script>
+
+    {% block extra_css %}{% endblock %}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="min-h-dvh flex flex-col {% block body_class %}{% endblock %}">
+    {% wagtailuserbar %}
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:m-3 focus:rounded focus:bg-forest focus:px-4 focus:py-2 focus:text-white">Skip to content</a>
+
+    {% include "includes/header.html" %}
+
+    <main id="main" class="flex-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "includes/footer.html" %}
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

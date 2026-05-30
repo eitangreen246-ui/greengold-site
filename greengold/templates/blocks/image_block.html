@@ -1,0 +1,9 @@
+{% load wagtailimages_tags %}
+<section class="section">
+  <div class="container-x">
+    <figure class="overflow-hidden rounded-2xl">
+      {% image value.image width-1600 class="w-full h-auto" alt=value.caption %}
+      {% if value.caption %}<figcaption class="mt-3 text-center text-sm text-ink/60">{{ value.caption }}</figcaption>{% endif %}
+    </figure>
+  </div>
+</section>

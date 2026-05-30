@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+
+# Django / Wagtail
+*.sqlite3
+/media/
+/staticfiles/
+greengold/settings/local.py
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Tailwind standalone binary (downloaded per-machine; large)
+/tailwindcss
+
+# Tooling
+.pytest_cache/
+.ruff_cache/
+
+# OS / editor
+.DS_Store
+*.swp

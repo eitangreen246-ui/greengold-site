@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "greengold",
+      "runtimeExecutable": "/Users/eitan/Desktop/greengold-site/.venv/bin/python",
+      "runtimeArgs": ["/Users/eitan/Desktop/greengold-site/manage.py", "runserver", "127.0.0.1:8011"],
+      "port": 8011
+    }
+  ]
+}

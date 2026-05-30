@@ -1,0 +1,11 @@
+<section class="section">
+  <div class="container-x">
+    <div class="rounded-3xl px-6 py-12 text-center sm:px-10 {% if value.variant == 'dark' %}bg-gradient-to-br from-forest to-forest-900 text-white{% else %}bg-forest-50{% endif %}">
+      <h2 class="mx-auto max-w-2xl text-3xl {% if value.variant == 'dark' %}text-white{% endif %} sm:text-4xl">{{ value.heading }}</h2>
+      {% if value.text %}<p class="mx-auto mt-4 max-w-xl {% if value.variant == 'dark' %}text-white/80{% else %}text-ink/70{% endif %}">{{ value.text }}</p>{% endif %}
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        {% for btn in value.buttons %}{% include "includes/button.html" with btn=btn %}{% endfor %}
+      </div>
+    </div>
+  </div>
+</section>

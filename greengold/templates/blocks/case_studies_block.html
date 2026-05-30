@@ -1,0 +1,31 @@
+{% load wagtailcore_tags %}
+<section class="section bg-white">
+  <div class="container-x">
+    {% if value.eyebrow %}<p class="eyebrow">{{ value.eyebrow }}</p>{% endif %}
+    {% if value.heading %}<h2 class="mt-3 text-3xl sm:text-4xl">{{ value.heading }}</h2>{% endif %}
+    {% if value.intro %}<p class="mt-4 max-w-2xl text-lg text-ink/70">{{ value.intro }}</p>{% endif %}
+    <div class="mt-10 grid gap-6 lg:grid-cols-2">
+      {% for item in value.items %}
+      <article class="card overflow-hidden">
+        <div class="border-b border-black/5 bg-forest-50 px-7 py-5">
+          <h3 class="text-2xl text-forest">{{ item.name }}</h3>
+          {% if item.tagline %}<p class="mt-1 text-sm font-medium text-forest-600">{{ item.tagline }}</p>{% endif %}
+        </div>
+        <div class="px-7 py-6">
+          {% if item.description %}<div class="prose-brand">{{ item.description|richtext }}</div>{% endif %}
+          {% if item.metrics %}
+          <dl class="mt-5 grid grid-cols-3 gap-4 border-t border-black/5 pt-5">
+            {% for m in item.metrics %}
+            <div>
+              <dt class="font-serif text-2xl font-bold text-forest">{{ m.value }}</dt>
+              <dd class="mt-1 text-xs text-ink/60">{{ m.label }}</dd>
+            </div>
+            {% endfor %}
+          </dl>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

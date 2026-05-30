@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-forest;
+    text-wrap: balance;
+  }
+  /* Respect reduced-motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-forest ring-offset-2 ring-offset-bg;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-forest-600;
+  }
+
+  /* Buttons — one primary CTA per section; gold reserved for accent */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold
+           transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-offset-2;
+    min-height: 44px; /* touch target */
+  }
+  .btn-primary {
+    @apply btn bg-forest text-white hover:bg-forest-800 focus-visible:ring-forest;
+  }
+  .btn-gold {
+    @apply btn bg-gold text-forest-900 hover:brightness-95 focus-visible:ring-gold;
+  }
+  .btn-outline {
+    @apply btn border border-forest/30 text-forest hover:bg-forest-50 focus-visible:ring-forest;
+  }
+
+  .card {
+    @apply rounded-2xl border border-black/5 bg-white shadow-card;
+  }
+
+  /* Rich-text defaults */
+  .prose-brand {
+    @apply text-ink/90 leading-relaxed;
+  }
+  .prose-brand h2 { @apply mt-10 text-2xl sm:text-3xl; }
+  .prose-brand h3 { @apply mt-8 text-xl; }
+  .prose-brand p { @apply mt-4; }
+  .prose-brand a { @apply text-gold-text underline underline-offset-2 hover:text-forest; }
+  .prose-brand ul { @apply mt-4 list-disc space-y-1 pl-5; }
+}
